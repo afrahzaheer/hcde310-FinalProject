@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Master</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='cover_photo.jpg') }}" alt="Cover Photo">
+    <h1 style="color: #4CAF50;">Meal Master</h1>
+    <p>Welcome to Meal Master! Select what food categories you want to create a meal plan for and then once you click on the generate meal plan button, you will be able to have a meal plan for the week that includes a meal from each category for each day of the week!</p>
+    <form action="/" method="POST">
+        {% for category, label in meal_categories.items() %}
+        <input type="checkbox" id="{{ category }}" name="category" value="{{ category }}">
+        <label for="{{ category }}" style="color: #007bff;">{{ label }}</label><br>
+        {% endfor %}
+        <button type="submit" class="button" style="background-color: #4CAF50;">Generate Meal Plan</button>
+    </form>
+</body>
+</html>

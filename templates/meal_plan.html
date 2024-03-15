@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal Plan</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 style="color: #4CAF50;">Meal Plan</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                {% for category in meal_plan['Monday'] %}
+                <th>{{ category }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for day, meals in meal_plan.items() %}
+            <tr>
+                <td>{{ day }}</td>
+                {% for category, meal in meals.items() %}
+                <td>
+                    {% if meal %}
+                    <a href="{{ url_for('meal_detail', meal_id=meal['idMeal']) }}" style="color: #007bff;">{{ meal['strMeal'] }}</a><br>
+                    <img src="{{ meal['strMealThumb'] }}" alt="{{ meal['strMeal'] }}" width="100">
+                    {% else %}
+                    No meal available
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
